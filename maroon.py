@@ -15,10 +15,10 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('!orange'):
+    if message.content.startswith('!maroon'):
         a=np.full((400,400,3),(0,0,randint(110,130)))
-        cv2.imwrite("orange.png",a)
-        await message.channel.send('Orange', file=discord.File('orange.png'))
+        cv2.imwrite("maroon.png",a)
+        await message.channel.send('maroon', file=discord.File('maroon.png'))
         
 
 @client.event
