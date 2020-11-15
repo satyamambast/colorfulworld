@@ -2,7 +2,10 @@ import discord
 import numpy as np
 import cv2
 from random import randint
-TOKEN = 'Nzc2NDA0Mzg0MTc5MTU5MDcx.X60Y7g.IvnI989n5bTH8To9bxI5CEZ2NaM'
+import pickle
+f=open("tokens.bin",'rb')
+tokens=pickle.load(f)
+TOKEN = tokens['orange']
 
 client = discord.Client()
 
@@ -15,7 +18,7 @@ async def on_message(message):
     if message.content.startswith('!orange'):
         a=np.full((400,400,3),(randint(0,40),randint(80,130),240))
         cv2.imwrite("orange.png",a)
-        await message.channel.send('Orange', file=discord.File('orange.png'))
+        await message.channel.send('orange', file=discord.File('orange.png'))
         
 
 @client.event
