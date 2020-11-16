@@ -3,6 +3,7 @@ import numpy as np
 import cv2
 from random import randint
 import pickle
+import os
 f=open("tokens.bin",'rb')
 tokens=pickle.load(f)
 TOKEN = tokens['orange']
@@ -19,7 +20,7 @@ async def on_message(message):
         a=np.full((400,400,3),(randint(0,40),randint(80,130),240))
         cv2.imwrite("orange.png",a)
         await message.channel.send('orange', file=discord.File('orange.png'))
-        
+        os.remove("orange.png")
 
 @client.event
 async def on_ready():
