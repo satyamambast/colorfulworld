@@ -23,7 +23,7 @@ async def on_message(message):
         os.remove("maroon.png")
     if message.content.startswith('!yellow'):
         num=randint(210,255)
-        a=np.full((400,400,3),(num,num,randint(0,200)))
+        a=np.full((400,400,3),(randint(0,200),num,num))
         cv2.imwrite("yellow.png",a)
         await message.channel.send('yellow', file=discord.File('yellow.png'))
         os.remove("yellow.png")
