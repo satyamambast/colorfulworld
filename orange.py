@@ -25,7 +25,7 @@ client = commands.Bot(command_prefix=["! ","!"])
 async def orange(ctx):
     a=np.full((400,400,3),(randint(0,40),randint(80,130),240))
     cv2.imwrite("orange.png",a)
-    ctx.send('orange', file=discord.File('orange.png'))
+    await ctx.send('orange', file=discord.File('orange.png'))
     os.remove("orange.png")
 
 @client.event
