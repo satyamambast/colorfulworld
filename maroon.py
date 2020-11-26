@@ -27,7 +27,11 @@ async def on_message(message):
         cv2.imwrite("yellow.png",a)
         await message.channel.send('yellow', file=discord.File('yellow.png'))
         os.remove("yellow.png")
-        
+    if message.content.startswith('!blue'):
+        a=np.full((400,400,3),(randint(80,255),0,0))
+        cv2.imwrite("maroon.png",a)
+        await message.channel.send('maroon', file=discord.File('maroon.png'))
+        os.remove("maroon.png")
 
 @client.event
 async def on_ready():
