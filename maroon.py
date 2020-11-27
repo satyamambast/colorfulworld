@@ -8,7 +8,7 @@ import os
 def createimage(lower,upper,filename):
     a=np.full((400,400,3),(randint(lower,upper), randint(200,255), randint(200,255)))
     cv2.imwrite(filename,a)
-    cv2.imread(filename)
+    img=cv2.imread(filename)
     img=cv2.cvtColor(img,cv2.COLOR_HSV2BGR)
     cv2.imwrite(filename,img)
 
@@ -36,7 +36,7 @@ async def yellow(ctx):
 async def blue(ctx):
     a=np.full((400,400,3),(randint(0,255),0,0))
     cv2.imwrite("blue.png",a)
-    await ctx.send('blue', file=discord.File('maroon.png'))
+    await ctx.send('blue', file=discord.File('blue.png'))
     os.remove("blue.png")
 
 @client.event
