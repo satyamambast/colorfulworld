@@ -16,30 +16,28 @@ f=open("tokens.bin",'rb')
 tokens=pickle.load(f)
 TOKEN = tokens['maroon']
 
-client = discord.Client()
+client = commands.Bot(command_prefix=["! ","!"])
 
 
+@client.command()
+async def maroon(ctx):
+    a=np.full((400,400,3),(0,0,randint(110,130)))
+    cv2.imwrite("maroon.png",a)
+    await ctx.send('maroon', file=discord.File('maroon.png'))
+    os.remove("maroon.png")
 
-@client.event
-async def on_message(message):
-    # we do not want the bot to reply to itself
-    if message.author == client.user:
-        return
+@client.command()
+async def yellow(ctx):
+    createimage(25,35,"yellow.png")
+    await ctx.send('yellow', file=discord.File('yellow.png'))
+    os.remove("yellow.png")
 
-    if message.content.startswith('!maroon'):
-        a=np.full((400,400,3),(0,0,randint(110,130)))
-        cv2.imwrite("maroon.png",a)
-        await message.channel.send('maroon', file=discord.File('maroon.png'))
-        os.remove("maroon.png")
-    if message.content.startswith('!yellow'):
-        createimage(21,40,"yellow.png")
-        await message.channel.send('yellow', file=discord.File('yellow.png'))
-        os.remove("yellow.png")
-    if message.content.startswith('!blue'):
-        a=np.full((400,400,3),(randint(80,255),0,0))
-        cv2.imwrite("maroon.png",a)
-        await message.channel.send('maroon', file=discord.File('maroon.png'))
-        os.remove("maroon.png")
+@client.command()
+async def blue(ctx):
+    a=np.full((400,400,3),(randint(0,255),0,0))
+    cv2.imwrite("blue.png",a)
+    await ctx.send('blue', file=discord.File('maroon.png'))
+    os.remove("blue.png")
 
 @client.event
 async def on_ready():
