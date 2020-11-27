@@ -34,7 +34,7 @@ async def yellow(ctx):
 
 @client.command()
 async def blue(ctx):
-    a=np.full((400,400,3),(randint(0,255),0,0))
+    a=np.full((400,400,3),(randint(40,255),0,0))
     cv2.imwrite("blue.png",a)
     await ctx.send('blue', file=discord.File('blue.png'))
     os.remove("blue.png")
