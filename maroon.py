@@ -61,7 +61,7 @@ async def colour(ctx,hex):
         cname=numbers[result[0]]
         a=np.full((400,400,3),clr)
         cv2.imwrite("colour.png",a)
-        await ctx.send(hex, file=discord.File('colour.png'))
+        await ctx.send(cname, file=discord.File('colour.png'))
         os.remove("colour.png")
     else:
         await ctx.send("Invalid Hex : Please only enter six digit hex with a single #")
