@@ -6,6 +6,15 @@ from discord.ext import commands
 import pickle
 import os
 import re
+import numpy as np
+import pandas as pd
+Y_in=pd.read_csv('colors.csv', usecols=['name'])
+number_column = Y_in.loc[:,'name']
+numbers = number_column.values
+
+filename = 'color_model.sav'
+color_model = pickle.load(open(filename, 'rb'))
+
 def createimage(lower,upper,filename):
     a=np.full((400,400,3),(randint(lower,upper), randint(200,255), randint(200,255)))
     cv2.imwrite(filename,a)
@@ -48,9 +57,11 @@ async def blue(ctx):
 async def colour(ctx,hex):
     if re.match(r'^#{0,1}[0-9A-F]{6}$',hex,re.I):
         clr=hex_to_rgb(hex)
+        result = color_model.predict([clr])
+        cname=numbers[result[0]]
         a=np.full((400,400,3),clr)
         cv2.imwrite("colour.png",a)
-        await ctx.send(hex, file=discord.File('colour.png'))
+        await ctx.send(cname, file=discord.File('colour.png'))
         os.remove("colour.png")
     else:
         await ctx.send("Invalid Hex : Please only enter six digit hex with a single #")
