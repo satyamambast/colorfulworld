@@ -57,7 +57,7 @@ async def blue(ctx):
 async def colour(ctx,hex):
     if re.match(r'^#{0,1}[0-9A-F]{6}$',hex,re.I):
         clr=hex_to_rgb(hex)
-        result = color_model.predict([clr])
+        result = color_model.predict([clr][::-1])
         cname=numbers[result[0]]
         a=np.full((400,400,3),clr)
         cv2.imwrite("colour.png",a)
