@@ -80,7 +80,7 @@ async def name(ctx,*,name):
     Name=''.join(name.split())
     col=csv.loc[csv['color'] == Name.lower()]
     if(len(col)>0):
-        bgr=(int(col["B"]),int(col["G"]),int(col["R"])
+        bgr=(int(col["B"]),int(col["G"]),int(col["R"]))
         a=np.full((400,400,3),bgr)
         cv2.imwrite("colour.png",a)
         await ctx.send(name, file=discord.File('colour.png'))
