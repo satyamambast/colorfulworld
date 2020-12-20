@@ -77,13 +77,13 @@ async def colour(ctx,hex):
         
 @client.command()
 async def name(ctx,*,name):
-    name=''.join(name.split())
-    col=csv.loc[csv['color'] == name.lower()]
+    Name=''.join(name.split())
+    col=csv.loc[csv['color'] == Name.lower()]
     if(len(col)>0):
         bgr=(int(col["B"]),int(col["G"]),int(col["R"])
         a=np.full((400,400,3),bgr)
         cv2.imwrite("colour.png",a)
-        await ctx.send(cname, file=discord.File('colour.png'))
+        await ctx.send(name, file=discord.File('colour.png'))
         os.remove("colour.png")
     else:
         await ctx.send("Colour Not Found")
