@@ -20,6 +20,10 @@ def getColorName(R,G,B):
             minimum = d
             cname = csv.loc[i,"color_name"]
     return cname
+# def getBGR(name):
+#     col=csv.loc[csv['color'] == name.lower()]
+#     bgr=(int(col["B"]),int(col["G"]),int(col["R"]))
+#     return bgr
 
 def createimage(lower,upper,filename):
     a=np.full((400,400,3),(randint(lower,upper), randint(200,255), randint(200,255)))
@@ -71,7 +75,18 @@ async def colour(ctx,hex):
     else:
         await ctx.send("Invalid Hex : Please only enter six digit hex with a single #")
         
-
+@client.command()
+async def name(ctx,*,name):
+    name=''.join(name.split())
+    col=csv.loc[csv['color'] == name.lower()]
+    if(len(col)>0):
+        bgr=(int(col["B"]),int(col["G"]),int(col["R"])
+        a=np.full((400,400,3),bgr)
+        cv2.imwrite("colour.png",a)
+        await ctx.send(cname, file=discord.File('colour.png'))
+        os.remove("colour.png")
+    else:
+        await ctx.send("Colour Not Found")
         
 @client.event
 async def on_ready():
